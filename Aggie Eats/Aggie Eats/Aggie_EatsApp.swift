@@ -11,7 +11,7 @@ import SwiftUI
 struct Aggie_EatsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BottomPageNav()
         }
     }
 }
