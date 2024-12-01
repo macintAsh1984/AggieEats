@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import CodeScanner
 
 struct ContentView: View {
     @State var location = MapCameraPosition.region(
@@ -15,36 +16,65 @@ struct ContentView: View {
             span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
         )
     )
+    @State var showScanner = false
+    @State var navigateToOrderingPage = false
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
+        NavigationStack {
+            ScrollView {
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text("Today's Location")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        Spacer()
-                        Button {
-                            print("QR Code Scanner Tapped")
-                        } label: {
-                            Image(systemName: "camera")
-                                .imageScale(.large)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Today's Location")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            Spacer()
+                            ScanQrCodeButton(showScanner: $showScanner)
                         }
+                        Text("Memorial Union")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
                     }
-                    Text("Memorial Union")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                    
+                    TruckLocationView()
+                    TodaysMenuView()
+                    
                 }
-                
-                TruckLocationView()
-                TodaysMenuView()
-                
             }
+            .sheet(isPresented: $showScanner) {
+                CodeScannerView(codeTypes: [.qr], simulatedData: "7A04A", completion: handleScan)
+            }
+            .navigationDestination(isPresented: $navigateToOrderingPage) {
+                OrderingView()
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         
+    }
+    
+    func handleScan(result: Result<ScanResult, ScanError>) {
+       showScanner = false
+        switch result {
+        case .success(let result):
+            navigateToOrderingPage = true
+            
+        case .failure(let error):
+            print("Scanning failed: \(error.localizedDescription)")
+        }
+    }
+}
+
+
+struct ScanQrCodeButton: View {
+    @Binding var showScanner: Bool
+    var body: some View {
+        Button {
+            showScanner = true
+        } label: {
+            Image(systemName: "camera")
+                .imageScale(.large)
+        }
     }
 }
 
