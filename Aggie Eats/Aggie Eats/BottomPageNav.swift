@@ -13,6 +13,9 @@ struct BottomPageNav: View {
             Tab("Today", systemImage: "star.fill") {
                 ContentView()
             }
+            Tab("Full Menu", systemImage: "menucard") {
+                FullMenu()
+            }
         }
     }
 }
