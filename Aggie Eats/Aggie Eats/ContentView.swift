@@ -20,9 +20,18 @@ struct ContentView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    Text("Today's Location")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                    HStack {
+                        Text("Today's Location")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Spacer()
+                        Button {
+                            print("QR Code Scanner Tapped")
+                        } label: {
+                            Image(systemName: "camera")
+                                .imageScale(.large)
+                        }
+                    }
                     Text("Memorial Union")
                         .font(.largeTitle)
                         .fontWeight(.bold)
