@@ -1,7 +1,7 @@
 [
   {
     "day": "Monday",
-    "name": "Memorial Union Quad",
+    "locationName": "Memorial Union Quad",
     "coordinate": [38.54141, -121.74845],
     "menu": {
         "Penne Pasta w/ Bolognese" : ["🌾","🐷"],
@@ -10,7 +10,7 @@
   },
   {
     "day": "Tuesday",
-    "name": "International Center",
+    "locationName": "International Center",
     "coordinate": [38.54540, -121.75494],
     "menu": {
         "Beef & Lamb Gyro" : ["🌾","🫛", "🥛"],
@@ -19,7 +19,7 @@
   },
   {
     "day": "Wednesday",
-    "name": "Storer Hall",
+    "locationName": "Storer Hall",
     "coordinate": [38.54114, -121.75461],
     "menu": {
         "Seafood Salad Tostada" : ["🥚","🦐", "🫛", "🐟"],
@@ -28,7 +28,7 @@
   },
   {
     "day": "Thursday",
-    "name": "Orchard Park",
+    "locationName": "Orchard Park",
     "coordinate": [38.544828, -121.765170],
     "menu": {
         "Teriyaki Beef w/ Stir Fry Noodles" : ["🌾","🫛", "SE"],
@@ -37,7 +37,7 @@
   },
    {
     "day": "Friday",
-    "name": "Memorial Union Quad",
+    "locationName": "Memorial Union Quad",
     "coordinate": [38.54141, -121.74845],
     "menu": {
         "Soy Ciltrano Lime Chicken" : ["🌾","🫛"],
