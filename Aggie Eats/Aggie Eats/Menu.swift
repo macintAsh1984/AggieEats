@@ -6,14 +6,18 @@
 //
 import Foundation
 
-struct Menu : Codable {
+struct Menu : Codable, Hashable {
     let day: String
     let locationName: String
     let coordinate: [Double]
-    let menu: [MenuOptions]
-}
-
-struct MenuOptions : Codable {
-    let option: String
-    let allergens: [String]
+    let menu: [String:[String]]
+    
+    func getTodaysLocation(_ today: String)-> String{
+        if today == day{
+            return locationName
+        }
+        return ""
+    }
+    
+    
 }

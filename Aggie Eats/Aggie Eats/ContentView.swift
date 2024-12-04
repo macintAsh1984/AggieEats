@@ -10,12 +10,8 @@ import MapKit
 import CodeScanner
 
 struct ContentView: View {
-    @State var location = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 38.54141, longitude: -121.74845),
-            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
-        )
-    )
+    let menu = Bundle.main.decode("Menu.json")
+
     @State var showScanner = false
     @State var navigateToOrderingPage = false
     
@@ -31,12 +27,17 @@ struct ContentView: View {
                             Spacer()
                             ScanQrCodeButton(showScanner: $showScanner)
                         }
-                        Text("Memorial Union")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                        
+                        ForEach(menu, id: \.self) { menuOption in
+                            if menuOption.day == getTodayWeekDay() {
+                                Text(menuOption.locationName)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                TruckLocationView(markerName: menuOption.locationName, coordinates: menuOption.coordinate)
+                            }
+                        }
                     }
                     
-                    TruckLocationView()
                     TodaysMenuView()
                     
                 }
@@ -52,6 +53,13 @@ struct ContentView: View {
         }
         
     }
+    
+    func getTodayWeekDay()-> String{
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "EEEE"
+           let weekDay = dateFormatter.string(from: Date())
+           return weekDay
+     }
     
     func handleScan(result: Result<ScanResult, ScanError>) {
        showScanner = false
@@ -79,11 +87,15 @@ struct ScanQrCodeButton: View {
 }
 
 struct TruckLocationView: View {
+    @State var markerName: String
+    @State var coordinates: [Double]
+    
     var body: some View {
         Map {
-            Marker("MU", coordinate: CLLocationCoordinate2D(latitude: 38.54141, longitude: -121.74845))
+            Marker(markerName, coordinate: CLLocationCoordinate2D(latitude: coordinates[0], longitude: coordinates[1]))
         }
-        .frame(width: 370, height: 400)
+        .frame(width: 380, height: 400)
+        
         .padding(.bottom)
     }
 }
