@@ -8,9 +8,10 @@
 import SwiftUI
 import MapKit
 import CodeScanner
+import OrderedCollections
 
 struct ContentView: View {
-    let menu = Bundle.main.decode("Menu.json")
+    let menu: [Menu] = Bundle.main.decode("Menu.json")
 
     @State var showScanner = false
     @State var navigateToOrderingPage = false
@@ -34,11 +35,11 @@ struct ContentView: View {
                                     .font(.largeTitle)
                                     .fontWeight(.bold)
                                 TruckLocationView(markerName: menuOption.locationName, coordinates: menuOption.coordinate)
+                                TodaysMenuView(menuItems: menuOption.menu)
                             }
                         }
                     }
                     
-                    TodaysMenuView()
                     
                 }
             }
@@ -101,48 +102,42 @@ struct TruckLocationView: View {
 }
 
 struct TodaysMenuView: View {
+    @State var menuItems: OrderedDictionary<String, [String]>
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("What's On The Menu?")
                 .font(.title)
                 .fontWeight(.bold)
-            TodaysMenuOptionsView()
+            TodaysMenuOptionsView(menuItems: $menuItems)
         }
     }
 }
 
 struct TodaysMenuOptionsView: View {
+    @Binding var menuItems: OrderedDictionary<String, [String]>
     var body: some View {
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color("Menu Options Color"))
-                .frame(height: 100)
-            VStack(alignment: .leading) {
-                Text("Chicken Bowl")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                Text("Out of Stock")
-                    .fontWeight(.medium)
-                    .foregroundColor(Color.red)
-                
+            ForEach(menuItems.keys, id: \.self) { key in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color("Menu Options Color"))
+                        .frame(height: 100)
+                    VStack(alignment: .leading) {
+                        Text(key)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                        if let value = menuItems[key] {
+                            HStack {
+                                ForEach(value, id: \.self) { item in
+                                    Text(item)
+                                }
+                            }
+                        }
+                        
+                    }
+                    .padding()
+                }
             }
-            .padding()
-        }
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color("Menu Options Color"))
-                .frame(height: 100)
-            VStack(alignment: .leading) {
-                Text("Hummus & Cucumber Sandwich")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                Text("Limited Availability")
-                    .fontWeight(.medium)
-                    .foregroundColor(Color.yellow)
-                
-            }
-            .padding()
-        }
     }
 }
 

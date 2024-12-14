@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB72E7902CFC1401004F534A /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = AB72E78F2CFC1401004F534A /* CodeScanner */; };
+		ABEC75242D029964005ADB28 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = ABEC75232D029964005ADB28 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABEC75242D029964005ADB28 /* OrderedCollections in Frameworks */,
 				AB72E7902CFC1401004F534A /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +73,7 @@
 			name = "Aggie Eats";
 			packageProductDependencies = (
 				AB72E78F2CFC1401004F534A /* CodeScanner */,
+				ABEC75232D029964005ADB28 /* OrderedCollections */,
 			);
 			productName = "Aggie Eats";
 			productReference = AB659FE62CF8E21F0064D1E6 /* Aggie Eats.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				AB72E78E2CFC1401004F534A /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				ABEC75222D029964005ADB28 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AB659FE72CF8E21F0064D1E6 /* Products */;
@@ -347,6 +351,14 @@
 				minimumVersion = 2.5.1;
 			};
 		};
+		ABEC75222D029964005ADB28 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -354,6 +366,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AB72E78E2CFC1401004F534A /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
+		};
+		ABEC75232D029964005ADB28 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABEC75222D029964005ADB28 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
