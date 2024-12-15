@@ -109,13 +109,13 @@ struct TodaysMenuView: View {
             Text("What's On The Menu?")
                 .font(.title)
                 .fontWeight(.bold)
-            TodaysMenuOptionsView(menuItems: $menuItems)
+            TodaysMenuOptionsView(menuItems: menuItems)
         }
     }
 }
 
 struct TodaysMenuOptionsView: View {
-    @Binding var menuItems: OrderedDictionary<String, [String]>
+    @State var menuItems: OrderedDictionary<String, [String]>
     var body: some View {
             ForEach(menuItems.keys, id: \.self) { key in
                 ZStack(alignment: .leading) {
