@@ -129,7 +129,14 @@ struct TodaysMenuOptionsView: View {
                         if let value = menuItems[key] {
                             HStack {
                                 ForEach(value, id: \.self) { item in
-                                    Text(item)
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color("Allergens Background Color"))
+                                            .frame(maxWidth: 40)
+                                        Text(item)
+                                            .fontWeight(.semibold)
+                                            .foregroundStyle(.white)
+                                    }
                                 }
                             }
                         }
