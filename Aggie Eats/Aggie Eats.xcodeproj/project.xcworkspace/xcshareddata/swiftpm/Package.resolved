@@ -1,5 +1,5 @@
 {
-  "originHash" : "6ca6c36d2b4c34cda0074bd72227ee1d8ec742940a18c8fb5f7d75b1f460d508",
+  "originHash" : "82ef69e9b08d5a7d8553d3019f032c31cceba4c3d9f6be7c5d712c6ec896c430",
   "pins" : [
     {
       "identity" : "codescanner",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "9fa582f4b36c69c2a55bff5fb3377eb170ae273c",
         "version" : "2.5.1"
+      }
+    },
+    {
+      "identity" : "stripe-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stripe/stripe-ios.git",
+      "state" : {
+        "revision" : "53ca7a35ceac4bf8755bef33c38ed2b94ef37d05",
+        "version" : "24.1.3"
       }
     },
     {

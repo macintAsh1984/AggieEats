@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		AB72E7902CFC1401004F534A /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = AB72E78F2CFC1401004F534A /* CodeScanner */; };
 		ABEC75242D029964005ADB28 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = ABEC75232D029964005ADB28 /* OrderedCollections */; };
+		ABF35EA12D120B3100431071 /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = ABF35EA02D120B3100431071 /* Stripe */; };
+		ABF35EA32D120B3100431071 /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = ABF35EA22D120B3100431071 /* StripePaymentSheet */; };
+		ABF35EA52D120B3100431071 /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = ABF35EA42D120B3100431071 /* StripePayments */; };
+		ABF35EA72D120B3100431071 /* StripePaymentsUI in Frameworks */ = {isa = PBXBuildFile; productRef = ABF35EA62D120B3100431071 /* StripePaymentsUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +32,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABF35EA72D120B3100431071 /* StripePaymentsUI in Frameworks */,
+				ABF35EA52D120B3100431071 /* StripePayments in Frameworks */,
+				ABF35EA32D120B3100431071 /* StripePaymentSheet in Frameworks */,
 				ABEC75242D029964005ADB28 /* OrderedCollections in Frameworks */,
 				AB72E7902CFC1401004F534A /* CodeScanner in Frameworks */,
+				ABF35EA12D120B3100431071 /* Stripe in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +82,10 @@
 			packageProductDependencies = (
 				AB72E78F2CFC1401004F534A /* CodeScanner */,
 				ABEC75232D029964005ADB28 /* OrderedCollections */,
+				ABF35EA02D120B3100431071 /* Stripe */,
+				ABF35EA22D120B3100431071 /* StripePaymentSheet */,
+				ABF35EA42D120B3100431071 /* StripePayments */,
+				ABF35EA62D120B3100431071 /* StripePaymentsUI */,
 			);
 			productName = "Aggie Eats";
 			productReference = AB659FE62CF8E21F0064D1E6 /* Aggie Eats.app */;
@@ -106,6 +118,7 @@
 			packageReferences = (
 				AB72E78E2CFC1401004F534A /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				ABEC75222D029964005ADB28 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				ABF35E9F2D120B3100431071 /* XCRemoteSwiftPackageReference "stripe-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AB659FE72CF8E21F0064D1E6 /* Products */;
@@ -359,6 +372,14 @@
 				minimumVersion = 1.1.4;
 			};
 		};
+		ABF35E9F2D120B3100431071 /* XCRemoteSwiftPackageReference "stripe-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -371,6 +392,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ABEC75222D029964005ADB28 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		ABF35EA02D120B3100431071 /* Stripe */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF35E9F2D120B3100431071 /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			productName = Stripe;
+		};
+		ABF35EA22D120B3100431071 /* StripePaymentSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF35E9F2D120B3100431071 /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			productName = StripePaymentSheet;
+		};
+		ABF35EA42D120B3100431071 /* StripePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF35E9F2D120B3100431071 /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			productName = StripePayments;
+		};
+		ABF35EA62D120B3100431071 /* StripePaymentsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF35E9F2D120B3100431071 /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			productName = StripePaymentsUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
