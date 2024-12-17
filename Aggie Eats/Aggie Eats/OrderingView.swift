@@ -17,6 +17,29 @@ struct OrderingView: View {
         amount * Decimal(quantity)
     }
     
+    private func startCheckout (completion: @escaping (String?) -> Void) {
+        guard let url = URL(string: "https://natural-inquisitive-comic.glitch.me/create-payment-intent") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+                        
+            guard let data = data, error == nil,
+                  (response as? HTTPURLResponse)?.statusCode == 200
+            else {
+                completion(nil)
+                return
+            }
+            
+            let checkoutIntentResponse = try? JSONDecoder().decode(CheckoutIntentResponse.self, from: data)
+            completion(checkoutIntentResponse?.clientSecret)
+
+        }.resume()
+        
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Order")
