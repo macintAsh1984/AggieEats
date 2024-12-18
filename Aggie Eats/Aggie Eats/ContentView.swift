@@ -51,7 +51,7 @@ struct ContentView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
+        } //end of nav stack
         
     }
     

@@ -11,18 +11,17 @@ struct OrderingView: View {
     @State var quantity: Int = 0
     @State var quantityStr: String = String()
     @State var amount: Decimal = 0.00
+    @State var navigateToOrderCompletion: Bool = false
     @FocusState var isAmountFocused: Bool
     
-    var computeTotal: Decimal {
-        amount * Decimal(quantity)
-    }
     
-    private func startCheckout (completion: @escaping (String?) -> Void) {
+    func startOrder (completion: @escaping (String?) -> Void) {
         guard let url = URL(string: "https://natural-inquisitive-comic.glitch.me/create-payment-intent") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try! JSONEncoder().encode(amount)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
                         
@@ -41,36 +40,53 @@ struct OrderingView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Order")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.bottom)
-            EnterQuantityView(quantity: $quantity, quantityStr: $quantityStr)
-            EnterAmountView(amount: $amount, isAmountFocused: $isAmountFocused)
-            Divider()
-                .frame(height: 3)
-                .overlay(.black)
-                .padding([.top, .bottom])
-            TotalView(total: computeTotal)
-          
-        Spacer()
-        }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationBarBackButtonHidden()
-        .toolbar(.hidden, for: .tabBar)
-        .onAppear {
-            quantityStr = String(quantity)
-        }
-        .onChange(of: quantity) {
-            quantityStr = String(quantity)
-        }
-        .onTapGesture {
-            isAmountFocused = false
-            
-            
-        }
+        NavigationStack {
+            VStack(alignment: .leading) {
+                Text("Order")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.bottom)
+                EnterQuantityView(quantity: $quantity, quantityStr: $quantityStr)
+                EnterAmountView(amount: $amount, isAmountFocused: $isAmountFocused)
+                Divider()
+                    .frame(height: 3)
+                    .overlay(.black)
+                    .padding([.top, .bottom])
+                TotalView(total: amount)
+                    .padding(.bottom)
+                Button {
+                    startOrder { clientSecret in
+                        PaymentConfig.shared.paymentIntentClientSecret = clientSecret
+                    }
+                    navigateToOrderCompletion = true
+                } label: {
+                    Text("Start Order")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
+                .controlSize(.large)
+                Spacer()
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .navigationBarBackButtonHidden()
+            .toolbar(.hidden, for: .tabBar)
+            .onAppear {
+                quantityStr = String(quantity)
+            }
+            .onChange(of: quantity) {
+                quantityStr = String(quantity)
+            }
+            .onTapGesture {
+                isAmountFocused = false
+                
+            }
+            .navigationDestination(isPresented: $navigateToOrderCompletion) {
+                OrderCompletion()
+            }
+        } //end of nav stack
     }
     
 }
