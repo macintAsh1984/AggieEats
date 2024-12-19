@@ -52,7 +52,7 @@ struct OrderingView: View {
                     .frame(height: 3)
                     .overlay(.black)
                     .padding([.top, .bottom])
-                TotalView(total: amount)
+                TotalView(total: $amount)
                     .padding(.bottom)
                 Button {
                     startOrder { clientSecret in
@@ -84,7 +84,7 @@ struct OrderingView: View {
                 
             }
             .navigationDestination(isPresented: $navigateToOrderCompletion) {
-                OrderCompletion()
+                OrderCompletion(total: $amount)
             }
         } //end of nav stack
     }
@@ -141,7 +141,7 @@ struct EnterAmountView : View {
 }
 
 struct TotalView: View {
-    var total: Decimal
+    @Binding var total: Decimal
     
     var body: some View {
         HStack {
